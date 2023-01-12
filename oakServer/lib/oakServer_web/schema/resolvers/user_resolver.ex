@@ -1,11 +1,19 @@
 defmodule OakServerWeb.Schema.Resolvers.UserResolver do
   alias OakServer.Auth
+  alias OakServerWeb.Utils
+  alias OakServerWeb.Constants
 
   def register_user(_, %{input: input}, _) do
-    IO.inspect(input)
-    res = Auth.create_user(input)
-    IO.puts("create_user res =>")
-    IO.inspect(res)
-    {:ok, true}
+    case Auth.create_user(input) do
+      {:ok, _} ->
+        {:ok, true}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        errors = Utils.format_changeset_errors(changeset)
+        {:error, errors}
+
+      {_, _} ->
+        {:error, Constants.internal_server_error()}
+    end
   end
 end

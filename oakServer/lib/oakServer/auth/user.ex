@@ -16,10 +16,10 @@ defmodule OakServer.Auth.User do
     user
     |> cast(attrs, [:name, :email, :username, :password])
     |> validate_required([:name, :email, :username, :password])
-    |> unique_constraint(:username, message: "username already taken")
+    |> unique_constraint(:username, message: "is already taken")
     |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:email, message: "This email is not valid")
-    |> validate_length(:password, min: 3, max: 16)
+    |> unique_constraint(:email, message: "is not valid")
+    |> validate_length(:password, min: 6, max: 16)
     |> validate_length(:name, min: 3, max: 16)
     |> validate_length(:username, min: 3, max: 16)
     |> hash_password
