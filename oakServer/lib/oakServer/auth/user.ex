@@ -25,9 +25,13 @@ defmodule OakServer.Auth.User do
     |> hash_password
   end
 
-  defp hash_password(changeset) do
-    IO.puts("changeset => ")
-    IO.inspect(changeset)
-    changeset
+  defp hash_password(%Ecto.Changeset{} = changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        new_changes = put_change(changeset, :password, Argon2.hash_pwd_salt(password))
+
+      new_changeset ->
+        changeset
+    end
   end
 end
