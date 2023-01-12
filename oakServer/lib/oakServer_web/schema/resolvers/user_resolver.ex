@@ -4,7 +4,7 @@ defmodule OakServerWeb.Schema.Resolvers.UserResolver do
   def register_user(_, %{input: input}, _) do
     IO.inspect(input)
     res = Auth.create_user(input)
-    IO.puts("creat_user res =>")
+    IO.puts("create_user res =>")
     IO.inspect(res)
     {:ok, true}
   end
