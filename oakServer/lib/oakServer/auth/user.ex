@@ -19,6 +19,9 @@ defmodule OakServer.Auth.User do
     |> unique_constraint(:username, message: "username already taken")
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email, message: "This email is not valid")
+    |> validate_length(:password, min: 3, max: 16)
+    |> validate_length(:name, min: 3, max: 16)
+    |> validate_length(:username, min: 3, max: 16)
     |> hash_password
   end
 
