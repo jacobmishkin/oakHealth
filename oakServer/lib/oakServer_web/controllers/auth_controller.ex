@@ -1,5 +1,6 @@
 defmodule OakServerWeb.AuthController do
   use OakServerWeb, :controller
+  import Plug.Conn
 
   alias OakServer.Auth
   alias OakServerWeb.Constants
@@ -15,7 +16,10 @@ defmodule OakServerWeb.AuthController do
           %User{} ->
             case Argon2.verify_pass(password, user.password) do
               true ->
-                render(conn, "acknowledge.json", %{message: "Logged In"})
+                conn
+                |> put_status(:created)
+                |> put_session(:current_user_id, user.id)
+                |> render(conn, "acknowledge.json", %{message: "Logged In"})
 
               _ ->
                 render(conn, "errors.json", %{errors: Constants.invalid_credentials()})
