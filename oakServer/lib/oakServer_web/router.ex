@@ -13,6 +13,7 @@ defmodule OakServerWeb.Router do
   scope "/api" do
     pipe_through(:api)
     post("/auth/register", AuthController, :register)
+    post("/auth/login", AuthController, :login)
   end
 
   scope "/api/graphql" do
