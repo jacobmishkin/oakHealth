@@ -8,7 +8,7 @@ defmodule OakServerWeb.AuthController do
   alias OakServer.Auth.User
 
   plug :dont_exploit_me when action in [:login]
-  plug :protect_me when action in [:logout]
+  plug :protect_me when action in [:logout, :getme]
 
   def login(conn, params) do
     case User.login_changeset(params) do
@@ -42,6 +42,10 @@ defmodule OakServerWeb.AuthController do
           message: Constants.internal_server_error()
         })
     end
+  end
+
+  def getme(conn, _params) do
+    render(conn, "getme.json", %{current_user: conn.assigns.current_user})
   end
 
   def logout(conn, _params) do
