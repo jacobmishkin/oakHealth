@@ -5,7 +5,7 @@ defmodule OakServerWeb.AuthView do
     %{success: true, message: message}
   end
 
-  def render("errors.json", %{errors: error}) do
-    %{success: false, errors: error}
+  def render("errors.json", %{errors: errors}) do
+    %{success: false, errors: errors}
   end
 end

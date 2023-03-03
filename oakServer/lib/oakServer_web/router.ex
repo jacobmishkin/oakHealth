@@ -2,8 +2,24 @@ defmodule OakServerWeb.Router do
   use OakServerWeb, :router
   alias OakServerWeb.AuthController
 
+  alias OakServerWeb.AuthController
+  alias OakServerWeb.Plugs.PopulateAuth
+
   pipeline :api do
-    plug(:accepts, ["json"])
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug PopulateAuth
+  end
+
+  pipeline :graphql do
+    plug :accepts, ["json"]
+  end
+
+  scope "/api" do
+    pipe_through :api
+    post "/auth/register", AuthController, :register
+    post "/auth/login", AuthController, :login
+    delete "/auth/logout", AuthController, :logout
   end
 
   pipeline :graphql do
@@ -16,14 +32,13 @@ defmodule OakServerWeb.Router do
   end
 
   scope "/api/graphql" do
-    pipe_through(:api)
+    pipe_through :graphql
 
-    get("/", Absinthe.Plug.GraphiQL,
+    get "/", Absinthe.Plug.GraphiQL,
       schema: OakServerWeb.Schema,
       interface: :playground
-    )
 
-    post("/", Absinthe.Plug.GraphiQL, schema: OakServerWeb.Schema)
+    post "/", Absinthe.Plug.GraphiQL, schema: OakServerWeb.Schema
   end
 
   # Enables LiveDashboard only for development
