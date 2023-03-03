@@ -1,5 +1,6 @@
 defmodule OakServerWeb.Router do
   use OakServerWeb, :router
+  alias OakServerWeb.AuthController
 
   alias OakServerWeb.AuthController
   alias OakServerWeb.Plugs.PopulateAuth
@@ -19,6 +20,15 @@ defmodule OakServerWeb.Router do
     post "/auth/register", AuthController, :register
     post "/auth/login", AuthController, :login
     delete "/auth/logout", AuthController, :logout
+  end
+
+  pipeline :graphql do
+    plug(:accepts, ["json"])
+  end
+
+  scope "/api" do
+    pipe_through(:api)
+    post("/auth/register", AuthController, :register)
   end
 
   scope "/api/graphql" do
