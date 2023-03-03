@@ -3,3 +3,5 @@
 node_modules/
 .env
 .elixir_ls
+.vscode
+erl_crash.dump
