@@ -20,5 +20,10 @@ defmodule OakServerWeb.Schema do
     field :get_me, :user_type do
       resolve(&Resolvers.UserResolver.get_me/3)
     end
+
+    @desc "Get all Glucoses"
+    field :glucoses, list_of(:glucose_type) do
+      resolve(&Resolvers.GlucoseResolver.get_all_glucoses/3)
+    end
   end
 end
