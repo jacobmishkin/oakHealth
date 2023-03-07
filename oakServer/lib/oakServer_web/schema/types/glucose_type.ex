@@ -10,4 +10,9 @@ defmodule OakServerWeb.Schema.Types.GlucoseType do
     field :time, non_null(:naive_datetime)
     field :inserted_at, :string
   end
+
+  input_object :glucose_input_type do
+    field :sugar, non_null(:integer)
+    field :time, non_null(:naive_datetime)
+  end
 end
