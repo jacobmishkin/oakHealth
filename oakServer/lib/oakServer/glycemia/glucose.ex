@@ -1,13 +1,14 @@
 defmodule OakServer.Glycemia.Glucose do
   use Ecto.Schema
   import Ecto.Changeset
+
   alias OakServer.Auth.User
 
   schema "glucoses" do
     field :sugar, :integer
-    field :time, :utc_datetime_usec
+    field :time, :naive_datetime
 
-    belongs_to :users, User
+    belongs_to :user, User
 
     timestamps()
   end

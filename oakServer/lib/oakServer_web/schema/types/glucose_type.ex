@@ -1,11 +1,13 @@
 defmodule OakServerWeb.Schema.Types.GlucoseType do
   use Absinthe.Schema.Notation
+  import_types(Absinthe.Type.Custom)
 
   object :glucose_type do
     field :id, :id
     field :user_id, :id
-    field :sugar, :integer
-    field :time, :utc_datetime_usec
+    field :user, :user_type
+    field :sugar, non_null(:integer)
+    field :time, non_null(:naive_datetime)
     field :inserted_at, :string
   end
 end
