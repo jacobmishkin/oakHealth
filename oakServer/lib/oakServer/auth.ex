@@ -18,18 +18,7 @@ defmodule OakServer.Auth do
 
   """
   def list_users do
-    Repo.all(
-      from(u in User,
-        select: %{
-          email: u.email,
-          name: u.name,
-          username: u.username,
-          id: u.id,
-          inserted_at: u.inserted_at
-        },
-        order_by: [desc: u.inserted_at]
-      )
-    )
+    Repo.all(from(u in User, preload: [:glucoses]))
   end
 
   @doc """

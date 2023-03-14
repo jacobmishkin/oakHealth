@@ -3,12 +3,15 @@ defmodule OakServer.Auth.User do
   import Ecto.Changeset
 
   alias OakServer.Auth.User
+  alias OakServer.Glycemia.Glucose
 
   schema "users" do
     field(:email, :string)
     field(:name, :string)
     field(:password, :string)
     field(:username, :string)
+
+    has_many :glucoses, Glucose
 
     timestamps()
   end
