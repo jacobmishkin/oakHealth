@@ -15,4 +15,8 @@ defmodule OakServerWeb.Schema.Types.GlucoseType do
     field :sugar, non_null(:integer)
     field :time, non_null(:naive_datetime)
   end
+
+  input_object :delete_glucose_input do
+    field :glucose_id, non_null(:id)
+  end
 end

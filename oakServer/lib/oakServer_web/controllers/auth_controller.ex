@@ -7,7 +7,7 @@ defmodule OakServerWeb.AuthController do
   alias OakServerWeb.Utils
   alias OakServer.Auth.User
 
-  plug :dont_exploit_me when action in [:login]
+  plug :dont_exploit_me when action in [:login, :register]
   plug :protect_me when action in [:logout, :getme]
 
   def login(conn, params) do

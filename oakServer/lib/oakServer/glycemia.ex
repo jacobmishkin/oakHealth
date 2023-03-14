@@ -101,4 +101,12 @@ defmodule OakServer.Glycemia do
   def change_glucose(%Glucose{} = glucose, attrs \\ %{}) do
     Glucose.changeset(glucose, attrs)
   end
+
+  @doc """
+    Deletes a glucose for a user. Requires the the id of the glucose and the user_id.
+  """
+  def delete_glucose_by_id(glucose_id, user_id) do
+    from(g in Glucose, where: g.id == ^glucose_id and g.user_id == ^user_id)
+    |> Repo.delete_all()
+  end
 end

@@ -33,5 +33,11 @@ defmodule OakServerWeb.Schema do
       arg(:input, non_null(:glucose_input_type))
       resolve(&Resolvers.GlucoseResolver.create_glucose/3)
     end
+
+    @desc "Delete Glucoses"
+    field :delete_glucose, :boolean do
+      arg(:input, non_null(:delete_glucose_input))
+      resolve(&Resolvers.GlucoseResolver.delete_glucose/3)
+    end
   end
 end
