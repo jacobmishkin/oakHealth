@@ -3,9 +3,9 @@ defmodule OakServer.Repo.Migrations.CreateGlucoses do
 
   def change do
     create_if_not_exists table(:glucoses) do
-      add :sugar, :integer
-      add :time, :naive_datetime
-      add :user_id, references(:users, on_delete: :delete_all)
+      add :sugar, :integer, null: false
+      add :time, :naive_datetime, null: false
+      add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end

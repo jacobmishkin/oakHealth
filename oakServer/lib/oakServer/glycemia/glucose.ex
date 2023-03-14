@@ -17,6 +17,6 @@ defmodule OakServer.Glycemia.Glucose do
   def changeset(glucose, attrs) do
     glucose
     |> cast(attrs, [:sugar, :time, :user_id])
-    |> validate_required([:sugar, :time])
+    |> validate_required([:sugar, :time, :user_id])
   end
 end

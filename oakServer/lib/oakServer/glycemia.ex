@@ -18,7 +18,7 @@ defmodule OakServer.Glycemia do
 
   """
   def list_glucoses do
-    Repo.all(Glucose)
+    Repo.all(from(g in Glucose, preload: [:user]))
   end
 
   @doc """

@@ -6,7 +6,7 @@ defmodule OakServerWeb.Schema.Types.UserType do
     field :name, :string
     field :email, :string
     field :username, :string
-    field :password, :string
     field :inserted_at, :string
+    field :glucoses, list_of(:glucose_type)
   end
 end

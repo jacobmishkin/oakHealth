@@ -10,7 +10,9 @@ defmodule OakServerWeb.Schema.Resolvers.GlucoseResolver do
   end
 
   def create_glucose(_, %{input: input}, %{context: context}) do
-    case Glycemia.create_glucose(input) do
+    input_with_user_id = Map.merge(input, %{user_id: context.current_user.id})
+
+    case Glycemia.create_glucose(input_with_user_id) do
       {:ok, _glucose} ->
         {:ok, true}
 

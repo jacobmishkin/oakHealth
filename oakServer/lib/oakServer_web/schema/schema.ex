@@ -30,7 +30,7 @@ defmodule OakServerWeb.Schema do
   mutation do
     @desc "Create Glucoses"
     field :create_glucose, :boolean do
-      arg(:input, :glucose_input_type)
+      arg(:input, non_null(:glucose_input_type))
       resolve(&Resolvers.GlucoseResolver.create_glucose/3)
     end
   end

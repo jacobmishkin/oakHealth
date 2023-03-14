@@ -11,7 +11,7 @@ defmodule OakServer.Auth.User do
     field(:password, :string)
     field(:username, :string)
 
-    has_many :glucoses, :glucose
+    has_many :glucoses, Glucose
 
     timestamps()
   end
